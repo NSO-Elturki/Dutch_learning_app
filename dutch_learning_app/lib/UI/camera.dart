@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dutch_learning_app/UI/ranking.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -134,6 +135,18 @@ class CameraState extends State<Camera> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => WordsPage(this.userId, 'showQuiz'),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.group),
+              title: new Text('Ranking'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Ranking(),
                   ),
                 );
               },

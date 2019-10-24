@@ -16,7 +16,38 @@ class DatabaseHelper {
       this.userId = user.uid;
     });
   }
-updateUser(int updateScore){
+
+  getCurrentUserInfo() async {
+    this.getCurrentUser();
+    User user;
+    DatabaseReference _firebaseDatabase = FirebaseDatabase.instance
+        .reference()
+        .child('Users')
+        .child(userId)
+        .child('profile');
+    await _firebaseDatabase.once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+
+        this.updateRankingTable(values['name'], values['image'], values['points']);
+      });
+    });
+
+  }
+
+  Future<void> updateRankingTable(String name, String img, int score) async {
+
+
+    //to get image from storge and upload to realtime
+      final databaseReference = FirebaseDatabase.instance
+          .reference()
+          .child('Ranking')
+          .push();
+      databaseReference
+          .set({'name': name, 'img': img, 'score': score});
+  }
+
+  updateUser(int updateScore){
 
   //  this.getCurrentUser();
   final databaseReference = FirebaseDatabase.instance
@@ -32,6 +63,7 @@ updateUser(int updateScore){
 
 
 }
+
 
 
   Future<void> saveTranslateItemToDb(String image, String nameOfItemInEn,
@@ -81,7 +113,7 @@ updateUser(int updateScore){
       final databaseReference = FirebaseDatabase.instance
           .reference()
           .child('Users')
-          .child('FZaDKCGEfIcbdeaj0cN3KV8kU7I3')
+          .child('qYwM6hfzmdgzTUBYcdogYVJBKKh1')
           .child('profile')
           .push();
       databaseReference

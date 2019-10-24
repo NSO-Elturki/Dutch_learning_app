@@ -190,10 +190,42 @@ class QuizPageState extends State<QuizPage> {
         .update({'points': updateScore + widget.points});
   }
 
+//  addToRanking(){
+//
+//    DatabaseHelper db = new DatabaseHelper();
+//    User user = db.getCurrentUserInfo();
+//    db.updateRankingTable(user);
+//
+//  }
+
+  getCurrentUserInfo() async {
+    DatabaseHelper db = new DatabaseHelper();
+    User user;
+    DatabaseReference _firebaseDatabase = FirebaseDatabase.instance
+        .reference()
+        .child('Users')
+        .child(widget.userId)
+        .child('profile');
+    await _firebaseDatabase.once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+
+        setState(() {
+          db.updateRankingTable(values['name'], values['image'], values['points']);
+
+        });
+      });
+    });
+
+  }
   nextQuestion() {
+
     setState(() {
       if (questionNumber == quiz.questions.length - 1) {
+        DatabaseHelper db = new DatabaseHelper();
         updateUser(this.finalScore);
+        this.getCurrentUserInfo();
+       // addToRanking();
         Navigator.push(
             context,
             new MaterialPageRoute(
