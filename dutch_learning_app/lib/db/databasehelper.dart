@@ -1,9 +1,6 @@
 import 'dart:io';
 import 'dart:math';
-
-import 'package:dutch_learning_app/UI/quizresult.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -17,54 +14,31 @@ class DatabaseHelper {
     });
   }
 
-  getCurrentUserInfo() async {
-    this.getCurrentUser();
-    User user;
-    DatabaseReference _firebaseDatabase = FirebaseDatabase.instance
-        .reference()
-        .child('Users')
-        .child(userId)
-        .child('profile');
-    await _firebaseDatabase.once().then((DataSnapshot snapshot) {
-      Map<dynamic, dynamic> values = snapshot.value;
-      values.forEach((key, values) {
-
-        this.updateRankingTable(values['name'], values['image'], values['points']);
-      });
-    });
-
-  }
-
-  Future<void> updateRankingTable(String name, String img, int score) async {
-
-
-    //to get image from storge and upload to realtime
+  Future<void> updateRankingTable(String name, String img, int score,
+      String userId, int isUserexsist) async {
+    //  var userNotExsist = this.checkUserOnRankingTable(name);
+    if (isUserexsist == 0) {
+      final databaseReference =
+          FirebaseDatabase.instance.reference().child('Ranking').child(userId);
+      databaseReference.set({'name': name, 'img': img, 'score': score});
+    } else {
       final databaseReference = FirebaseDatabase.instance
           .reference()
           .child('Ranking')
-          .push();
-      databaseReference
-          .set({'name': name, 'img': img, 'score': score});
+          .child(userId)
+          .update({'score': score});
+    }
   }
 
-  updateUser(int updateScore){
-
-  //  this.getCurrentUser();
-  final databaseReference = FirebaseDatabase.instance
-      .reference()
-      .child('Users')
-      .child('FZaDKCGEfIcbdeaj0cN3KV8kU7I3')
-      .child('profile')
-      .update({
-
-    'points': updateScore
-  });
-  
-
-
-}
-
-
+  updateUser(int updateScore, String userId) {
+    //  this.getCurrentUser();
+    final databaseReference = FirebaseDatabase.instance
+        .reference()
+        .child('Users')
+        .child(userId)
+        .child('profile')
+        .update({'points': updateScore});
+  }
 
   Future<void> saveTranslateItemToDb(String image, String nameOfItemInEn,
       String nameOfItemInNl, String groupName) async {

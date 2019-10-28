@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:dutch_learning_app/db/databasehelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
-
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -19,7 +17,6 @@ class ProfilePage extends StatefulWidget {
 class ProfilePageState extends State<ProfilePage> {
 //  File _image = File('images/profile.png');
   var _image;
-
 
   TextEditingController insertName = new TextEditingController();
   TextEditingController insertCity = new TextEditingController();
@@ -34,21 +31,16 @@ class ProfilePageState extends State<ProfilePage> {
   }
 
   saveProfile() {
-
     db = new DatabaseHelper();
     if (insertName != null && insertCity != null) {
-
       db.saveUserProfile(insertName.text, insertCity.text, _image);
-
-
     } else {
-
       return showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               title:
-              new Text('Please insert your name and the city you live at'),
+                  new Text('Please insert your name and the city you live at'),
               actions: <Widget>[
                 FlatButton(
                   child: new Text('Ok'),
@@ -94,35 +86,25 @@ class ProfilePageState extends State<ProfilePage> {
     );
   }
 
-
-
-
-  Widget image(){
-
-    if(this._image == null){
-
+  Widget image() {
+    if (this._image == null) {
       setState(() {
-
-        this._image =  getImageFileFromAssets('images/profile.png');
+        this._image = getImageFileFromAssets('images/profile.png');
       });
 
-      return Image.asset('images/profile.png',
-      height: 100.0
-      );
-
-    }else{
-
-      return Image.file(_image,
-      height: 100.0);
+      return Image.asset('images/profile.png', height: 100.0);
+    } else {
+      return Image.file(_image, height: 100.0);
     }
   }
+
   getImageFileFromAssets(String path) async {
     final byteData = await rootBundle.load('assets/$path');
 
     final file = File('${(await getTemporaryDirectory()).path}/$path');
-    await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+    await file.writeAsBytes(byteData.buffer
+        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
 
     return file;
   }
 }
-

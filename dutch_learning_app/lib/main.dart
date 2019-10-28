@@ -16,7 +16,7 @@ import 'package:dutch_learning_app/UI/loginpage.dart';
 //  ));
 //}
 import 'package:flutter/material.dart';
-import 'package:dutch_learning_app/UI/wordspage.dart';
+import 'package:dutch_learning_app/UI/wordtypepage.dart';
 import 'package:dutch_learning_app/UI/camera.dart';
 import 'package:dutch_learning_app/UI/displaywords.dart';
 

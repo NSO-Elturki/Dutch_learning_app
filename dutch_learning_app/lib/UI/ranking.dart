@@ -1,28 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
-class User{
-
-  String city, name, image;
-  int points;
-  User(String name, String city, int points, String image){
-    this.name = name;
-    this.city = city;
-    this.points = points;
-    this.image = image;
-  }
-}
-class Rank{
-
-  String name, img;
-  int score;
-  Rank(String name, String img, int score){
-
-    this.name = name;
-    this.img = img;
-    this.score = score;
-  }
-}
+import 'package:dutch_learning_app/classes/rank.dart';
 
 class Ranking extends StatefulWidget{
   @override
@@ -31,14 +9,13 @@ class Ranking extends StatefulWidget{
     return RankingState();
   }
 
-
 }
 
 class RankingState extends State<Ranking>{
 
-  List<Rank>allUsers = new List<Rank>();
+  List<Ranker>allUsers = new List<Ranker>();
 
-  getAllWords() async {
+  getUsersRank() async {
     DatabaseReference _firebaseDatabase = FirebaseDatabase.instance
         .reference()
         .child('Ranking');
@@ -46,7 +23,7 @@ class RankingState extends State<Ranking>{
       Map<dynamic, dynamic> values = snapshot.value;
       values.forEach((key, values) {
         setState(() {
-          allUsers.add(new Rank(values['name'], values['img'], values['score']));
+          allUsers.add(new Ranker(values['name'], values['img'], values['score']));
           print(allUsers.length);
         });
       });
@@ -56,7 +33,7 @@ class RankingState extends State<Ranking>{
   @override
   void initState() {
     super.initState();
-   this.getAllWords();
+   this.getUsersRank();
   }
 
   @override

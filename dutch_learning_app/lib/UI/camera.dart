@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'package:dutch_learning_app/UI/ranking.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import 'package:dutch_learning_app/UI/getlabel.dart';
-import 'package:dutch_learning_app/UI/wordspage.dart';
-import 'package:dutch_learning_app/UI/quizpage.dart';
-
+import 'package:dutch_learning_app/UI/wordtypepage.dart';
 
 class Camera extends StatefulWidget {
   final CameraDescription camera;
@@ -28,7 +25,7 @@ class CameraState extends State<Camera> {
   // future variable will return what is store on the cameracontroller
   Future<void> _initializeControllerFuture;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  var userId, userProfileKey;
+  var userId;
 
   Future<FirebaseUser> getCurrentUser() async {
     return await _auth.currentUser().then((user) {
@@ -36,13 +33,10 @@ class CameraState extends State<Camera> {
     });
   }
 
-
   @override
   void initState() {
     super.initState();
     getCurrentUser();
-    print('$this.userProfileKey nagiiiii');
-    print(userId);
     // here I get the view of camera when the camera is open
     _controller = CameraController(
       //here told system which camera to use which is pass from the main class as parameter which will be
@@ -122,7 +116,8 @@ class CameraState extends State<Camera> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => WordsPage(this.userId, 'showWords'),
+                    builder: (context) =>
+                        WordTypesPage(this.userId, 'showWords'),
                   ),
                 );
               },
@@ -134,7 +129,8 @@ class CameraState extends State<Camera> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => WordsPage(this.userId, 'showQuiz'),
+                    builder: (context) =>
+                        WordTypesPage(this.userId, 'showQuiz'),
                   ),
                 );
               },

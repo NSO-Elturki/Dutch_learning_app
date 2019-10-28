@@ -4,36 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:dutch_learning_app/UI/displaywords.dart';
 
-class Types {
-  String _type;
-  List<Words> words = new List<Words>();
-  Types(String type, String word, String img) {
-    this._type = type;
-    this.words.add(new Words(img, word));
-  }
-}
 
-class Words {
-  String word, img;
-  Words(String img, String word) {
-    this.word = word;
-    this.img = img;
-  }
-}
 
-class WordsPage extends StatefulWidget {
+
+class WordTypesPage extends StatefulWidget {
   String userId;
   String nextPage;
-  WordsPage(this.userId, this.nextPage);
+  WordTypesPage(this.userId, this.nextPage);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return WordsPageState();
+    return WordTypesPageState();
   }
 }
 
-class WordsPageState extends State<WordsPage> {
+class WordTypesPageState extends State<WordTypesPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   var userId;
   var typeOfWords = [];
@@ -54,13 +40,13 @@ class WordsPageState extends State<WordsPage> {
         setState(() {
           this.userProfileKey = key;
           this.points = values['points'];
-          print('$key nagi');
+         // print('$key nagi');
         });
       });
     });
   }
 
-  getAllWords() async {
+  getAllWordTypes() async {
     DatabaseReference _firebaseDatabase = FirebaseDatabase.instance
         .reference()
         .child('Users')
@@ -83,7 +69,7 @@ class WordsPageState extends State<WordsPage> {
     super.initState();
 
     geUserProfileKey();
-    getAllWords();
+    getAllWordTypes();
   }
 
   @override
@@ -115,6 +101,7 @@ class WordsPageState extends State<WordsPage> {
         context,
         MaterialPageRoute(
           builder: (context) => QuizPage(typeOfWord, widget.userId, userProfileKey, points),
+
         ),
       );
     } else {

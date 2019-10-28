@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:dutch_learning_app/UI/wordspage.dart';
+import 'package:dutch_learning_app/classes/words.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 

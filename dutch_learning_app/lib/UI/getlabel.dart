@@ -1,13 +1,11 @@
-import 'dart:convert';
 import 'dart:core';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:translator/translator.dart';
 import 'package:dutch_learning_app/db/databasehelper.dart';
-import 'package:dutch_learning_app/UI/wordspage.dart';
+import 'package:dutch_learning_app/UI/wordtypepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 
 
@@ -147,7 +145,7 @@ class _MyAppState extends State<GetLabel> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => WordsPage(userId,'showWords'),
+              builder: (context) => WordTypesPage(userId,'showWords'),
             ),
           );
         },

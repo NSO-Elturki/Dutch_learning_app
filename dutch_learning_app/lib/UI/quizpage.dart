@@ -1,16 +1,16 @@
-import 'dart:math';
 import 'package:dutch_learning_app/db/databasehelper.dart';
 import 'package:flutter/material.dart';
 import 'package:dutch_learning_app/classes/quiz.dart';
 import 'package:dutch_learning_app/UI/quizresult.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:dutch_learning_app/UI/wordspage.dart';
+import 'package:dutch_learning_app/classes/words.dart';
 
 class QuizPage extends StatefulWidget {
   String titleOfQuiz, userId, userProfileKey;
   int points;
 
   QuizPage(this.titleOfQuiz, this.userId, this.userProfileKey, this.points);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -27,7 +27,8 @@ class QuizPageState extends State<QuizPage> {
   var images = [];
   var choices = [];
   var correctAnswers = [];
-
+  DatabaseHelper db;
+  int userExsist;
 
   getAllWords() async {
     DatabaseReference _firebaseDatabase = FirebaseDatabase.instance
@@ -81,6 +82,10 @@ class QuizPageState extends State<QuizPage> {
     super.initState();
 
     this.getAllWords();
+    db = new DatabaseHelper();
+    this.checkUserOnRankingTable(widget.userId);
+
+    //  this.userExsist = db.checkUserOnRankingTable(widget.userId);
   }
 
   @override
@@ -180,7 +185,7 @@ class QuizPageState extends State<QuizPage> {
     );
   }
 
-  updateUser(int updateScore) {
+  updateUserScore(int updateScore) {
     final databaseReference = FirebaseDatabase.instance
         .reference()
         .child('Users')
@@ -190,17 +195,29 @@ class QuizPageState extends State<QuizPage> {
         .update({'points': updateScore + widget.points});
   }
 
-//  addToRanking(){
-//
-//    DatabaseHelper db = new DatabaseHelper();
-//    User user = db.getCurrentUserInfo();
-//    db.updateRankingTable(user);
-//
-//  }
+  checkUserOnRankingTable(String id) async {
+    DatabaseReference _firebaseDatabase =
+        FirebaseDatabase.instance.reference().child('Ranking');
+    await _firebaseDatabase.once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+
+      values.forEach((key, values) {
+        setState(() {
+          print('$key key of the foreach');
+          if (key.toString() == id) {
+            this.userExsist = 1;
+          } else {
+            this.userExsist = 0;
+          }
+        });
+      });
+    });
+  }
 
   getCurrentUserInfo() async {
-    DatabaseHelper db = new DatabaseHelper();
-    User user;
+    // DatabaseHelper db = new DatabaseHelper();
+
+    //  User user;
     DatabaseReference _firebaseDatabase = FirebaseDatabase.instance
         .reference()
         .child('Users')
@@ -209,23 +226,22 @@ class QuizPageState extends State<QuizPage> {
     await _firebaseDatabase.once().then((DataSnapshot snapshot) {
       Map<dynamic, dynamic> values = snapshot.value;
       values.forEach((key, values) {
-
         setState(() {
-          db.updateRankingTable(values['name'], values['image'], values['points']);
-
+          print('$userExsist this is user exsist');
+          db.updateRankingTable(values['name'], values['image'],
+              values['points'], key.toString(), this.userExsist);
+          print('${key.toString()} nagi key');
         });
       });
     });
-
   }
-  nextQuestion() {
 
+  nextQuestion() {
     setState(() {
       if (questionNumber == quiz.questions.length - 1) {
-        DatabaseHelper db = new DatabaseHelper();
-        updateUser(this.finalScore);
+        //  DatabaseHelper db = new DatabaseHelper();
+        updateUserScore(this.finalScore);
         this.getCurrentUserInfo();
-       // addToRanking();
         Navigator.push(
             context,
             new MaterialPageRoute(
