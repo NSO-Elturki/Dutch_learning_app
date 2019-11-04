@@ -11,27 +11,27 @@ PODS:
     - Firebase/Core
     - Firebase/Firestore (~> 6.0)
     - Flutter
-  - Firebase/Auth (6.10.0):
+  - Firebase/Auth (6.11.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (~> 6.3.0)
-  - Firebase/Core (6.10.0):
+    - FirebaseAuth (~> 6.3.1)
+  - Firebase/Core (6.11.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.1.3)
-  - Firebase/CoreOnly (6.10.0):
-    - FirebaseCore (= 6.3.1)
-  - Firebase/Database (6.10.0):
+  - Firebase/CoreOnly (6.11.0):
+    - FirebaseCore (= 6.3.2)
+  - Firebase/Database (6.11.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (~> 6.1.1)
-  - Firebase/Firestore (6.10.0):
+  - Firebase/Firestore (6.11.0):
     - Firebase/CoreOnly
-    - FirebaseFirestore (~> 1.6.0)
-  - Firebase/MLVision (6.10.0):
+    - FirebaseFirestore (~> 1.6.1)
+  - Firebase/MLVision (6.11.0):
     - Firebase/CoreOnly
     - FirebaseMLVision (~> 0.19.0)
-  - Firebase/MLVisionLabelModel (6.10.0):
+  - Firebase/MLVisionLabelModel (6.11.0):
     - Firebase/CoreOnly
     - FirebaseMLVisionLabelModel (~> 0.19.0)
-  - Firebase/Storage (6.10.0):
+  - Firebase/Storage (6.11.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 3.4.1)
   - firebase_auth (0.0.1):
@@ -60,14 +60,14 @@ PODS:
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3.901)
-  - FirebaseAuth (6.3.0):
+  - FirebaseAuth (6.3.1):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.2)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.2)
     - GoogleUtilities/Environment (~> 6.2)
     - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseAuthInterop (1.0.0)
-  - FirebaseCore (6.3.1):
+  - FirebaseCore (6.3.2):
     - FirebaseCoreDiagnostics (~> 1.0)
     - FirebaseCoreDiagnosticsInterop (~> 1.0)
     - GoogleUtilities/Environment (~> 6.2)
@@ -83,22 +83,22 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - leveldb-library (~> 1.22)
-  - FirebaseFirestore (1.6.0):
+  - FirebaseFirestore (1.6.1):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.2)
-    - FirebaseFirestore/abseil-cpp (= 1.6.0)
+    - FirebaseFirestore/abseil-cpp (= 1.6.1)
     - "gRPC-C++ (= 0.0.9)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 0.3.901)
     - Protobuf (>= 3.9.2, ~> 3.9)
-  - FirebaseFirestore/abseil-cpp (1.6.0):
+  - FirebaseFirestore/abseil-cpp (1.6.1):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.2)
     - "gRPC-C++ (= 0.0.9)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 0.3.901)
     - Protobuf (>= 3.9.2, ~> 3.9)
-  - FirebaseInstanceID (4.2.5):
+  - FirebaseInstanceID (4.2.6):
     - FirebaseCore (~> 6.0)
     - GoogleUtilities/Environment (~> 6.0)
     - GoogleUtilities/UserDefaults (~> 6.0)
@@ -138,22 +138,22 @@ PODS:
     - GoogleUtilities/Network (~> 6.0)
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (~> 0.3.901)
-  - GoogleDataTransport (3.0.0)
-  - GoogleDataTransportCCTSupport (1.2.0):
+  - GoogleDataTransport (3.0.1)
+  - GoogleDataTransportCCTSupport (1.2.1):
     - GoogleDataTransport (~> 3.0)
     - nanopb (~> 0.3.901)
-  - GoogleToolboxForMac/DebugUtils (2.2.1):
-    - GoogleToolboxForMac/Defines (= 2.2.1)
-  - GoogleToolboxForMac/Defines (2.2.1)
-  - GoogleToolboxForMac/Logger (2.2.1):
-    - GoogleToolboxForMac/Defines (= 2.2.1)
-  - "GoogleToolboxForMac/NSData+zlib (2.2.1)":
-    - GoogleToolboxForMac/Defines (= 2.2.1)
-  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.1)":
-    - GoogleToolboxForMac/DebugUtils (= 2.2.1)
-    - GoogleToolboxForMac/Defines (= 2.2.1)
-    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.1)"
-  - "GoogleToolboxForMac/NSString+URLArguments (2.2.1)"
+  - GoogleToolboxForMac/DebugUtils (2.2.2):
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+  - GoogleToolboxForMac/Defines (2.2.2)
+  - GoogleToolboxForMac/Logger (2.2.2):
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+  - "GoogleToolboxForMac/NSData+zlib (2.2.2)":
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.2.2)":
+    - GoogleToolboxForMac/DebugUtils (= 2.2.2)
+    - GoogleToolboxForMac/Defines (= 2.2.2)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.2)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.2.2)"
   - GoogleUtilities/AppDelegateSwizzler (6.3.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -188,19 +188,19 @@ PODS:
     - gRPC-Core/Interface (= 1.21.0)
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.21.0)
-  - GTMSessionFetcher (1.2.2):
-    - GTMSessionFetcher/Full (= 1.2.2)
-  - GTMSessionFetcher/Core (1.2.2)
-  - GTMSessionFetcher/Full (1.2.2):
-    - GTMSessionFetcher/Core (= 1.2.2)
+  - GTMSessionFetcher (1.3.0):
+    - GTMSessionFetcher/Full (= 1.3.0)
+  - GTMSessionFetcher/Core (1.3.0)
+  - GTMSessionFetcher/Full (1.3.0):
+    - GTMSessionFetcher/Core (= 1.3.0)
   - image_picker (0.0.1):
     - Flutter
   - leveldb-library (1.22)
-  - nanopb (0.3.901):
-    - nanopb/decode (= 0.3.901)
-    - nanopb/encode (= 0.3.901)
-  - nanopb/decode (0.3.901)
-  - nanopb/encode (0.3.901)
+  - nanopb (0.3.9011):
+    - nanopb/decode (= 0.3.9011)
+    - nanopb/encode (= 0.3.9011)
+  - nanopb/decode (0.3.9011)
+  - nanopb/encode (0.3.9011)
   - path_provider (0.0.1):
     - Flutter
   - Protobuf (3.10.0)
@@ -272,41 +272,41 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
-  cloud_firestore: 0ac494d23db743f104b95d3291946afec187b74c
-  Firebase: 5e6b7b12bf9adb90986688edc06b156c37e109cd
-  firebase_auth: 1e3b7bdd37b9fbd4ef75ba1d985b00be09e02d3d
-  firebase_core: ae55ea92448ec8675d325da4db22cf3b4d58a54d
-  firebase_database: d4f066a1b01f309676d0d2678ec600d6af18ad97
+  camera: b367c0508b16dfaae3b5ef685b636de0029e3193
+  cloud_firestore: 38fed761113dd560b894043a89b1181d3cdace20
+  Firebase: bc9cfc7a96c73268656d5aaab453ff1b4b530e0e
+  firebase_auth: 1d505faa673806aad96e7c82a538b95ba166ed63
+  firebase_core: 693f9bb48d60a9621bd6092dc19e588e9a4ff1fe
+  firebase_database: 7328977d10df1e5c2905966a1cfa7be1606cb281
   firebase_ml_vision: d09b1eb3c242cf8124db4d51c0927376e3dbd9f4
-  firebase_storage: 52b0c06e27af628b627be28d32b4b540f6b67cf7
+  firebase_storage: eb2b42db188fad27853368e09714a5c2f30e1aee
   FirebaseAnalytics: 0e3ecff2c5d86070f7d4325e21f1edabfbd558dc
-  FirebaseAuth: c66e990f79d1d3429165391f6cd70ace6143c25e
+  FirebaseAuth: b401a012cc33b04df3b52bb308b04e8766f2693e
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: 064c2dd92a8ca5974bbdcb080df9921e46bd34cd
+  FirebaseCore: beeff42c07c30ea94702471d99db2089b594fbbd
   FirebaseCoreDiagnostics: af29e43048607588c050889d19204f4d7b758c9f
   FirebaseCoreDiagnosticsInterop: 6829da2b8d1fc795ff1bd99df751d3788035d2cb
   FirebaseDatabase: 524802f7694268c79d34aeac3d67997593e1a0c9
-  FirebaseFirestore: 5a9e9a14305336e8d1a4f915a45ecf0f5d6dcaec
-  FirebaseInstanceID: 550df9be1f99f751d8fcde3ac342a1e21a0e6c42
+  FirebaseFirestore: bb8315fa13a15ea8977e940496b74ba6ad9071f2
+  FirebaseInstanceID: d0eafcd8bdbd3447cd694594734078c3e3e77d8b
   FirebaseMLCommon: 074a67e05122b1c9f6401a4e33b2cea3b4efd224
   FirebaseMLVision: 7a456009787690e3b53436092ae9b635563de8f3
   FirebaseMLVisionLabelModel: 7638a20d27219d5baa4b534a62375fc1d5bd077d
   FirebaseStorage: b7c6d00997bc21d4465453bdcc5cc65513110fed
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Flutter: 446b87ace8a3747a167979213b4aef59a0b5e5fa
   GoogleAPIClientForREST: 4acfffd77f1c3c8741b6be9eaed0e603278efbde
   GoogleAppMeasurement: 434cc7be25e71dc04b8d0e3079125127b330e84a
-  GoogleDataTransport: f6fe28f43e3a300736854260961ad485b473edc5
-  GoogleDataTransportCCTSupport: 862418a8cdda520c4dd4af83a756d04efe4a6990
-  GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
+  GoogleDataTransport: 166f9b9f82cbf60a204e8fe2daa9db3e3ec1fb15
+  GoogleDataTransportCCTSupport: f6ab1962e9dc05ab1fb938b795e5b310209edeec
+  GoogleToolboxForMac: 800648f8b3127618c1b59c7f97684427630c5ea3
   GoogleUtilities: f895fde57977df4e0233edda0dbeac490e3703b6
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
-  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
-  image_picker: 16e5fec1fbc87fd3b297c53e4048521eaf17cd06
+  GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
+  image_picker: b00a34f520cb69740de605c04b8be4f3d3c49dba
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
-  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
+  nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  path_provider: d6b45f2abd6d46082316e15beadf67eeb95adb2a
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
 PODFILE CHECKSUM: 0a3e5184e3acb1e0c2d63a1844689b8bd5660c1b

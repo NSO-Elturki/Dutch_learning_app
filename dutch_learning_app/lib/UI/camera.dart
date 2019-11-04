@@ -7,6 +7,9 @@ import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import 'package:dutch_learning_app/UI/getlabel.dart';
 import 'package:dutch_learning_app/UI/wordtypepage.dart';
+import 'package:dutch_learning_app/src/pages/index.dart';
+
+
 
 class Camera extends StatefulWidget {
   final CameraDescription camera;
@@ -143,6 +146,18 @@ class CameraState extends State<Camera> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => Ranking(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.videocam),
+              title: new Text('Video chat'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => IndexPage(),
                   ),
                 );
               },
