@@ -7,7 +7,7 @@ import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import 'package:dutch_learning_app/UI/getlabel.dart';
 import 'package:dutch_learning_app/UI/wordtypepage.dart';
-import 'package:dutch_learning_app/src/pages/index.dart';
+import 'package:dutch_learning_app/UI/videocall.dart';
 
 
 
@@ -157,7 +157,7 @@ class CameraState extends State<Camera> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => IndexPage(),
+                    builder: (context) => VideoCall(),
                   ),
                 );
               },

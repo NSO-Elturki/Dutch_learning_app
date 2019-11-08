@@ -30,6 +30,20 @@ class DatabaseHelper {
     }
   }
 
+  Future<void> updateVideoChatTopicTable(String topic, int nrOfView) async {
+    //  var userNotExsist = this.checkUserOnRankingTable(name);
+    if (nrOfView == 0) {
+      final databaseReference =
+      FirebaseDatabase.instance.reference().child('VideoChatTopices').push();
+      databaseReference.set({'topic': topic, 'view': 0});
+    } else {
+      final databaseReference = FirebaseDatabase.instance
+          .reference()
+          .child('VideoChatTopices')
+          .update({'view': nrOfView});
+    }
+  }
+
   updateUser(int updateScore, String userId) {
     //  this.getCurrentUser();
     final databaseReference = FirebaseDatabase.instance

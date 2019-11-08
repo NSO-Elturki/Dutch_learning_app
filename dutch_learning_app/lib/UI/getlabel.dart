@@ -133,7 +133,8 @@ class _MyAppState extends State<GetLabel> {
     new FloatingActionButton(
       heroTag: 'saveWord',
         onPressed: saveWordToDb,
-        backgroundColor: Colors.green,
+
+      backgroundColor: Colors.green,
       child: new Text('Save'),
       ),
       new FloatingActionButton(
