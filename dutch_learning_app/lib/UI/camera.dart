@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dutch_learning_app/UI/loginpage.dart';
 import 'package:dutch_learning_app/UI/ranking.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +101,7 @@ class CameraState extends State<Camera> {
         },
       ),
       floatingActionButton: new FloatingActionButton(
+
         child: Icon(Icons.camera_alt),
         onPressed: takePictureAndStore,
       ),
@@ -109,7 +111,7 @@ class CameraState extends State<Camera> {
             ListTile(
               title: new Text(
                 'Dutch learning app',
-                style: new TextStyle(fontSize: 30.0, color: Colors.green),
+                style: new TextStyle(fontSize: 30.0, color: Colors.blue),
               ),
             ),
             ListTile(
@@ -158,6 +160,18 @@ class CameraState extends State<Camera> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => VideoCall(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.close),
+              title: new Text('Sign out'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(false),
                   ),
                 );
               },

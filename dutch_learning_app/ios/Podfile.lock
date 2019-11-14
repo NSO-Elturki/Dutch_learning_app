@@ -1,4 +1,8 @@
 PODS:
+  - agora_rtc_engine (1.0.1):
+    - AgoraRtcEngine_iOS (= 2.9.1)
+    - Flutter
+  - AgoraRtcEngine_iOS (2.9.1)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -127,6 +131,8 @@ PODS:
     - FirebaseCore (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - Flutter (1.0.0)
+  - flutter_tts (0.0.1):
+    - Flutter
   - GoogleAPIClientForREST/Core (1.3.10):
     - GTMSessionFetcher (>= 1.1.7)
   - GoogleAPIClientForREST/Vision (1.3.10):
@@ -203,9 +209,12 @@ PODS:
   - nanopb/encode (0.3.9011)
   - path_provider (0.0.1):
     - Flutter
+  - permission_handler (3.3.0):
+    - Flutter
   - Protobuf (3.10.0)
 
 DEPENDENCIES:
+  - agora_rtc_engine (from `.symlinks/plugins/agora_rtc_engine/ios`)
   - camera (from `.symlinks/plugins/camera/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - Firebase/MLVisionLabelModel
@@ -215,11 +224,14 @@ DEPENDENCIES:
   - firebase_ml_vision (from `.symlinks/plugins/firebase_ml_vision/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_tts (from `.symlinks/plugins/flutter_tts/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
 
 SPEC REPOS:
   trunk:
+    - AgoraRtcEngine_iOS
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
@@ -249,6 +261,8 @@ SPEC REPOS:
     - Protobuf
 
 EXTERNAL SOURCES:
+  agora_rtc_engine:
+    :path: ".symlinks/plugins/agora_rtc_engine/ios"
   camera:
     :path: ".symlinks/plugins/camera/ios"
   cloud_firestore:
@@ -265,12 +279,18 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
+  flutter_tts:
+    :path: ".symlinks/plugins/flutter_tts/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
 
 SPEC CHECKSUMS:
+  agora_rtc_engine: 869b652afb7c72b0cf143b86c7e36d0dea9a84ee
+  AgoraRtcEngine_iOS: b2eedd8f9ab47b71163f3285e836bd23feb43fff
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   camera: b367c0508b16dfaae3b5ef685b636de0029e3193
   cloud_firestore: 38fed761113dd560b894043a89b1181d3cdace20
@@ -294,6 +314,7 @@ SPEC CHECKSUMS:
   FirebaseMLVisionLabelModel: 7638a20d27219d5baa4b534a62375fc1d5bd077d
   FirebaseStorage: b7c6d00997bc21d4465453bdcc5cc65513110fed
   Flutter: 446b87ace8a3747a167979213b4aef59a0b5e5fa
+  flutter_tts: 8ef9d28ecff6321d667307300dbf45151273b3fb
   GoogleAPIClientForREST: 4acfffd77f1c3c8741b6be9eaed0e603278efbde
   GoogleAppMeasurement: 434cc7be25e71dc04b8d0e3079125127b330e84a
   GoogleDataTransport: 166f9b9f82cbf60a204e8fe2daa9db3e3ec1fb15
@@ -307,6 +328,7 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   path_provider: d6b45f2abd6d46082316e15beadf67eeb95adb2a
+  permission_handler: 67637977b227d62d46bfbf524f335f8568de5a73
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
 PODFILE CHECKSUM: 0a3e5184e3acb1e0c2d63a1844689b8bd5660c1b

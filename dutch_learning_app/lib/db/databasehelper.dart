@@ -86,7 +86,7 @@ class DatabaseHelper {
   }
 
   Future<void> saveUserProfile(String name, String city, File image) async {
-    // this.getCurrentUser();
+     this.getCurrentUser();
     final String imageName = Random().nextInt(10000).toString();
     final StorageReference storageReference =
         FirebaseStorage.instance.ref().child('Images/$imageName');
@@ -101,7 +101,7 @@ class DatabaseHelper {
       final databaseReference = FirebaseDatabase.instance
           .reference()
           .child('Users')
-          .child('qYwM6hfzmdgzTUBYcdogYVJBKKh1')
+          .child(this.userId)
           .child('profile')
           .push();
       databaseReference

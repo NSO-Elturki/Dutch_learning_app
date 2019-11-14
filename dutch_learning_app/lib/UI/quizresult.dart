@@ -1,5 +1,7 @@
 import 'package:dutch_learning_app/UI/loginpage.dart';
+import 'package:dutch_learning_app/UI/wordtypepage.dart';
 import 'package:dutch_learning_app/db/databasehelper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
@@ -16,9 +18,12 @@ class User{
     this.score = score;
   }
 }
+
 class QuizResult extends StatelessWidget {
   int score, quizLenght;
   var feedback = '';
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  var userId;
 
   QuizResult(this.score, this.quizLenght);
 
@@ -34,6 +39,7 @@ class QuizResult extends StatelessWidget {
         margin: const EdgeInsets.all(10.0),
         alignment: Alignment.topCenter,
         child: feedBack(context),
+
       )),
     );
   }
@@ -60,13 +66,16 @@ class QuizResult extends StatelessWidget {
           RaisedButton(
             child: new Text('Go back'),
             onPressed: () {
+
+              this.getCurrentUser();
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginPage(),
+                  builder: (context) => WordTypesPage( this.userId ,"showQuiz"),
                 ),
-              );             },
-          )
+              );
+            },
+          ),
         ],
       );
     }
@@ -88,13 +97,16 @@ class QuizResult extends StatelessWidget {
           RaisedButton(
             child: new Text('Go back'),
             onPressed: () {
+
+              this.getCurrentUser();
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginPage(),
+                  builder: (context) => WordTypesPage( this.userId ,"showQuiz"),
                 ),
-              );             },
-          )
+              );
+            },
+          ),
         ],
       );
     }
@@ -116,15 +128,27 @@ class QuizResult extends StatelessWidget {
           RaisedButton(
             child: new Text('Go back'),
             onPressed: () {
+
+              
+              this.getCurrentUser();
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginPage(),
+                  builder: (context) => WordTypesPage( this.userId ,"showQuiz"),
                 ),
-              );            },
-          )
+              );
+            },
+          ),
         ],
       );
     }
   }
+
+  Future<FirebaseUser> getCurrentUser() async {
+    return await _auth.currentUser().then((user) {
+      this.userId = user.uid;
+    });
+  }
+
+
 }

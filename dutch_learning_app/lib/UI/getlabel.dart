@@ -124,35 +124,29 @@ class _MyAppState extends State<GetLabel> {
       appBar: new AppBar(
         title: new Text('$englishWord - $dutchTranslate'),
       ),
-      body: Image.file(new File(widget.imagePath)),
-//      floatingActionButton: new FloatingActionButton(
-//        onPressed: saveWordToDb,
-//        backgroundColor: Colors.green,
-//      ),
-    persistentFooterButtons: <Widget>[
-    new FloatingActionButton(
-      heroTag: 'saveWord',
-        onPressed: saveWordToDb,
+      body: Container(
+        child: ListView(
+          children: <Widget>[
 
-      backgroundColor: Colors.green,
-      child: new Text('Save'),
-      ),
-      new FloatingActionButton(
-        heroTag: 'showWords',
-        child: new Text('Show all words'),
-
-        onPressed: (){
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => WordTypesPage(userId,'showWords'),
+            Image.file(new File(widget.imagePath),
+            height: 510.0,
             ),
-          );
-        },
-        backgroundColor: Colors.green,
+        RaisedButton(
+          child: new Text("Save",
+          style: TextStyle(
+            fontSize: 20.0,
+            color: Colors.white
+          ),
+          ),
+          onPressed: saveWordToDb,
+          color: Colors.blue,
+        ),
+
+          ],
+        )
       ),
-    ],
+      resizeToAvoidBottomPadding: false,
     );
   }
 }
+

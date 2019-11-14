@@ -5,8 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
+import 'package:camera/camera.dart';
+import 'package:dutch_learning_app/UI/camera.dart';
+
+
 
 class ProfilePage extends StatefulWidget {
+
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -49,6 +55,20 @@ class ProfilePageState extends State<ProfilePage> {
             );
           });
     }
+    this.goToCamera();
+  }
+
+  Future<void> goToCamera() async {
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Camera(
+          camera: firstCamera,
+        ),
+      ),
+    );
   }
 
   @override
