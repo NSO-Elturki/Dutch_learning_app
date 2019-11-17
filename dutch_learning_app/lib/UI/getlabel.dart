@@ -41,7 +41,6 @@ class _MyAppState extends State<GetLabel> {
 
   }
 
-
   saveWordToDb() {
     TextEditingController insertText = new TextEditingController();
 

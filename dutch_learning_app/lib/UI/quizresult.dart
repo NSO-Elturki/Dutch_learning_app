@@ -129,7 +129,7 @@ class QuizResult extends StatelessWidget {
             child: new Text('Go back'),
             onPressed: () {
 
-              
+
               this.getCurrentUser();
               Navigator.push(
                 context,

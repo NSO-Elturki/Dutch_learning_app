@@ -1,5 +1,8 @@
+import 'dart:core';
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
+import 'package:dutch_learning_app/classes/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -14,7 +17,7 @@ class DatabaseHelper {
     });
   }
 
-  Future<void> updateRankingTable(String name, String img, int score,
+  Future<void> updateRankingTable(Future name, String img, int score,
       String userId, int isUserexsist) async {
     //  var userNotExsist = this.checkUserOnRankingTable(name);
     if (isUserexsist == 0) {
@@ -108,4 +111,34 @@ class DatabaseHelper {
           .set({'name': name, 'city': city, 'image': value, 'points': 0});
     });
   }
+
+  Future<void>saveNewEventMember(User user, String address, String key) async{
+
+    this.getCurrentUser();
+
+    final databaseReference = FirebaseDatabase.instance
+          .reference()
+          .child('EventsMembers')
+           .child(address)
+          .push();
+      databaseReference
+          .set({'name': user.name, 'city': user.city, 'image': user.image, 'points': user.points, 'id':key});
+
+  }
+
+  Future<void>saveAddress(String address, double lat, double long) async{
+
+    final databaseReference = FirebaseDatabase.instance
+        .reference()
+        .child('Events')
+    .push();
+    databaseReference
+        .set({'address': address, 'lat': lat, 'long': long});
+
+  }
+
+
+
+
+
 }

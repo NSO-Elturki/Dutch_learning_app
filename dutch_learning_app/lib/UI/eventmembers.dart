@@ -1,58 +1,104 @@
-import 'package:dutch_learning_app/UI/displayprofilepage.dart';
+import 'package:dutch_learning_app/UI/eventsmap.dart';
+import 'package:dutch_learning_app/classes/user.dart';
+import 'package:dutch_learning_app/db/databasehelper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:dutch_learning_app/classes/rank.dart';
-import 'package:camera/camera.dart';
-import 'package:dutch_learning_app/UI/camera.dart';
 
+class EventMembers extends StatefulWidget{
 
-class Ranking extends StatefulWidget{
+  String eventAddress;
+  EventMembers(this.eventAddress);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return RankingState();
+    return EventMembersState();
   }
+
 
 }
 
-class RankingState extends State<Ranking>{
+class EventMembersState extends State<EventMembers>{
 
-  List<Ranker>allUsers = new List<Ranker>();
+  DatabaseHelper db;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+//  List<User>allMembers = new List<User>();
+  List<User>allMembers = new List<User>();
+  var usersIds = [];
 
+  var userId;
 
-  getUsersRank() async {
+  Future<FirebaseUser> getCurrentUser() async {
+    return await _auth.currentUser().then((user) {
+      this.userId = user.uid;
+    });
+  }
+
+  addUserToEvent() async {
+    debugPrint('$userId NAGI');
+    debugPrint('${widget.eventAddress}NAGI2');
+
     DatabaseReference _firebaseDatabase = FirebaseDatabase.instance
         .reference()
-        .child('Ranking');
+        .child('Users')
+        .child(userId)
+        .child('profile');
     await _firebaseDatabase.once().then((DataSnapshot snapshot) {
       Map<dynamic, dynamic> values = snapshot.value;
+
       values.forEach((key, values) {
         setState(() {
-          allUsers.add(new Ranker(values['name'], values['img'], values['score'], values['city']));
-          print(allUsers.length);
+          var name = values["name"];
+          var city = values["city"];
+          var points = values["points"];
+          var image = values["image"];
+
+
+          db.saveNewEventMember(User(name, city, points, image), widget.eventAddress, userId);
         });
       });
     });
-    this.sortList();
+  }
+
+  getAllEventMembers() async{
+
+    DatabaseReference _firebaseDatabase = FirebaseDatabase.instance
+        .reference()
+        .child('EventsMembers')
+        .child(widget.eventAddress);
+    await _firebaseDatabase.once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+
+      values.forEach((key, values) {
+        setState(() {
+          var name = values["name"];
+          var city = values["city"];
+          var points = values["points"];
+          var image = values["image"];
+          this.allMembers.add(User(name, city, points, image));
+          this.usersIds.add(values['id']);
+
+
+        });
+        print(key);
+      });
+    });
+
   }
 
   @override
   void initState() {
     super.initState();
-   this.getUsersRank();
-  // this.sortList();
-  }
 
-  sortList(){
-
-    Comparator<Ranker> priceComparator = (a, b) => b.score.compareTo(a.score);
-    allUsers.sort(priceComparator);
-
+   db = new DatabaseHelper();
+   getCurrentUser();
+   getAllEventMembers();
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
     return Scaffold(
 
       backgroundColor: Colors.blueAccent,
@@ -69,7 +115,7 @@ class RankingState extends State<Ranking>{
                   color: Colors.white,
                   onPressed: (){
 
-                   this.goToCamera();
+                    this.goToMap();
 
                   },
                 )
@@ -81,7 +127,7 @@ class RankingState extends State<Ranking>{
             padding: EdgeInsets.only(left: 40.0),
             child: Row(
               children: <Widget>[
-                Text('Ranking',
+                Text('Event',
                   style: TextStyle(
                       fontFamily: 'Montserrat',
                       color: Colors.white,
@@ -110,7 +156,7 @@ class RankingState extends State<Ranking>{
                     height: MediaQuery.of(context).size.height - 300.0,
                     child: ListView.builder(
 
-                        itemCount: this.allUsers.length,
+                        itemCount: this.allMembers.length,
                         itemBuilder: (context, index){
 
                           return Padding(
@@ -118,13 +164,7 @@ class RankingState extends State<Ranking>{
                             child: InkWell(
                               onTap: (){
 
-                                 debugPrint(allUsers[index].city);
-                                 Navigator.push(
-                                   context,
-                                   MaterialPageRoute(
-                                     builder: (context) => DisplayProfilePage(allUsers[index].img, allUsers[index].name, allUsers[index].score, 'Eindhoven'),
-                                   ),
-                                 );
+
                               },
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,9 +174,9 @@ class RankingState extends State<Ranking>{
                                       children: <Widget>[
                                         Hero(
 
-                                            tag: allUsers[index].img,
+                                            tag: allMembers[index].image,
                                             child: Image(
-                                              image: NetworkImage(allUsers[index].img),
+                                              image: NetworkImage(allMembers[index].image),
                                               fit: BoxFit.cover,
                                               height: 75.0,
                                               width: 75.0,
@@ -147,7 +187,7 @@ class RankingState extends State<Ranking>{
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              allUsers[index].name,
+                                              allMembers[index].name,
                                               style: TextStyle(
 
                                                   fontFamily: 'Montserrat',
@@ -156,7 +196,7 @@ class RankingState extends State<Ranking>{
                                               ),
                                             ),
                                             Text(
-                                              allUsers[index].score.toString(),
+                                              allMembers[index].points.toString(),
                                               style: TextStyle(
 
                                                   fontFamily: 'Montserrat',
@@ -185,20 +225,74 @@ class RankingState extends State<Ranking>{
 
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
+        onPressed: (){
+
+
+         // this.addUserToEvent();
+          if(this.checCurrentkUserInList(this.userId) == true){
+
+            debugPrint('User already in the list');
+            this.userIsInTheList();
+          }else{
+
+              this.addUserToEvent();
+
+          }
+        },
+
+      ),
     );
+
   }
 
-  Future<void> goToCamera() async {
-    final cameras = await availableCameras();
-    final firstCamera = cameras.first;
+  userIsInTheList(){
+
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text('You are already in the event list'),
+
+            actions: <Widget>[
+              FlatButton(
+                child: new Text('Ok'),
+                onPressed: (){
+
+                  Navigator.of(context).pop();
+
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  checCurrentkUserInList(String id){
+
+    for( String i in this.usersIds){
+
+      if(i == id){
+
+        return true;
+      }
+
+    }
+    return false;
+  }
+
+  void goToMap() {
+
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Camera(
-          camera: firstCamera,
-        ),
+        builder: (context) => EventsMap(),
       ),
     );
   }
+
+
 
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dutch_learning_app/UI/eventsmap.dart';
 import 'package:dutch_learning_app/UI/loginpage.dart';
 import 'package:dutch_learning_app/UI/ranking.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -172,6 +173,18 @@ class CameraState extends State<Camera> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => LoginPage(false),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.map),
+              title: new Text('Events'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EventsMap(),
                   ),
                 );
               },
